@@ -16,7 +16,7 @@ public class BasketController {
 
     private final BasketService basketService;
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<Basket> getBasketById(@PathVariable String id) {
         return ResponseEntity.ok(basketService.getBasketById(id));
     }
@@ -34,6 +34,12 @@ public class BasketController {
     @PutMapping("/{id}/payment")
     public ResponseEntity<Basket> payBasket(@PathVariable String id, @RequestBody PaymentRequest basket) {
         return ResponseEntity.status(HttpStatus.OK).body(basketService.payBasket(id, basket));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBasket(@PathVariable String id){
+        basketService.deleteBasket(id);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
 }
